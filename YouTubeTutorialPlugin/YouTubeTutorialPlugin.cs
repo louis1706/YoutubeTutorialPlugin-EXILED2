@@ -10,10 +10,10 @@ namespace YouTubeTutorialPlugin
 {
     public class YouTubeTutorialPlugin : Plugin<Config>
     {
-	    private static readonly Lazy<YouTubeTutorialPlugin> LazyInstance = new Lazy<YouTubeTutorialPlugin>(() => new YouTubeTutorialPlugin());
-	    public static YouTubeTutorialPlugin Instance => LazyInstance.Value;
+		public static YouTubeTutorialPlugin Instance { get; } = new YouTubeTutorialPlugin();
+		private YouTubeTutorialPlugin() { }
 
-	    public override PluginPriority Priority { get; } = PluginPriority.Medium;
+		public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
 	    private Handlers.Server server;
 	    private Handlers.Player player;
@@ -21,10 +21,6 @@ namespace YouTubeTutorialPlugin
 	    private int _patchesCounter;
 
 	    public Harmony Harmony { get; private set; }
-
-	    private YouTubeTutorialPlugin()
-	    {
-	    }
 
 		public override void OnEnabled()
 		{
