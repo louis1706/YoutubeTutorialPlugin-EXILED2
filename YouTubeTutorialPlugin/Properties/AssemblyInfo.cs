@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("YouTubeTutorialPlugin")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Just a plugin created for my tutorial vid")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("jeppevinkel")]
 [assembly: AssemblyProduct("YouTubeTutorialPlugin")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright © Jepp Developments 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
