@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace YouTubeTutorialPlugin.Api
@@ -12,7 +7,9 @@ namespace YouTubeTutorialPlugin.Api
 	public class PlayerData
 	{
 		private static readonly string PlayersPath =
-			Environment.ExpandEnvironmentVariables(@"%AppData%\EXILED\Plugins\YouTubeTutorialPlugin\Players");
+			Path.Combine(
+				Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+					"YouTubeTutorialPlugin"), "Players");
 
 		public int Kills { get; internal set; }
 		public int Deaths { get; internal set; }

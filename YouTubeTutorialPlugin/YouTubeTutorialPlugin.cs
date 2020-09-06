@@ -78,6 +78,7 @@ namespace YouTubeTutorialPlugin
 			Player.Left += player.OnLeft;
 			Player.Joined += player.OnJoined;
 			Player.InteractingDoor += player.OnInteractingDoor;
+			Player.Died += player.OnPlayerDied;
 
 			Server.WaitingForPlayers += server.OnWaitingForPlayers;
 			Server.RoundStarted += server.OnRoundStarted;
@@ -88,6 +89,7 @@ namespace YouTubeTutorialPlugin
 			Player.Left -= player.OnLeft;
 			Player.Joined -= player.OnJoined;
 			Player.InteractingDoor -= player.OnInteractingDoor;
+			Player.Died -= player.OnPlayerDied;
 
 			Server.WaitingForPlayers -= server.OnWaitingForPlayers;
 			Server.RoundStarted -= server.OnRoundStarted;

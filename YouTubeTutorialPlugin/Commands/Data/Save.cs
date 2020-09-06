@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CommandSystem;
-using Exiled.API.Features;
 using YouTubeTutorialPlugin.Api;
 
 namespace YouTubeTutorialPlugin.Commands
