@@ -19,5 +19,9 @@ namespace YouTubeTutorialPlugin
 
 		[Description("Sets the message for when someone triggers a booby trap.")]
 		public string BoobyTrapMessage { get; set; } = "This door has been booby trapped!";
+
+		[Description(
+			"Amount of time to cache players after they have left. (Best to keep resonable to avoid disk read on round restarts)")]
+		public float PlayerCacheTime { get; set; } = 120;
 	}
 }

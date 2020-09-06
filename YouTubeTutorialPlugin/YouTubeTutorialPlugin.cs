@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Loader;
 using HarmonyLib;
+using YouTubeTutorialPlugin.Api;
 using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
 
@@ -17,6 +19,8 @@ namespace YouTubeTutorialPlugin
 
 	    private Handlers.Server server;
 	    private Handlers.Player player;
+
+	    public static Dictionary<string, PlayerData> PlayerData = new Dictionary<string, PlayerData>();
 
 	    private int _patchesCounter;
 

@@ -64,11 +64,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>..\..\EXILED2-References\EXILED\Plugins\dependencies\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\PlayerData.cs" />
     <Compile Include="Commands\Allow.cs" />
+    <Compile Include="Commands\Data\Prefix.cs" />
+    <Compile Include="Commands\Data\Save.cs" />
     <Compile Include="Commands\Deny.cs" />
     <Compile Include="Commands\HelloWorld.cs" />
+    <Compile Include="Commands\Data\List.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Handlers\Player.cs" />
     <Compile Include="Handlers\Server.cs" />
@@ -79,5 +86,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

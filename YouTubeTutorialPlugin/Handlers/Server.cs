@@ -1,4 +1,5 @@
 ﻿using Exiled.API.Features;
+using YouTubeTutorialPlugin.Api;
 
 namespace YouTubeTutorialPlugin.Handlers
 {
@@ -13,6 +14,11 @@ namespace YouTubeTutorialPlugin.Handlers
 		{
 			Map.Broadcast(6, YouTubeTutorialPlugin.Instance.Config.RoundStartedMessage);
 			Log.Info(YouTubeTutorialPlugin.Instance.Config.RoundStartedMessage);
+
+			foreach (Exiled.API.Features.Player player in Exiled.API.Features.Player.List)
+			{
+				YouTubeTutorialPlugin.PlayerData.GetOrAdd(player.UserId, () => new PlayerData()).RoundsPlayed++;
+			}
 		}
 	}
 }
