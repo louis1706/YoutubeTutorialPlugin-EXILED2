@@ -8,7 +8,7 @@ namespace YouTubeTutorialPlugin.Patches
 	{
 		static bool Prefix(Radio __instance)
 		{
-			return false;
+			return __instance.ccm.CurClass == RoleType.ChaosInsurgency;
 		}
 	}
 }

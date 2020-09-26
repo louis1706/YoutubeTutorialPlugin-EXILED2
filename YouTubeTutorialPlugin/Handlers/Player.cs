@@ -5,9 +5,9 @@ using YouTubeTutorialPlugin.Api;
 
 namespace YouTubeTutorialPlugin.Handlers
 {
-	class Player
+	internal class Player
 	{
-		public void OnLeft(LeftEventArgs ev)
+		public static void OnLeft(LeftEventArgs ev)
 		{
 			string message =
 				YouTubeTutorialPlugin.Instance.Config.LeftMessage.Replace("{player}", ev.Player.Nickname);
@@ -16,7 +16,7 @@ namespace YouTubeTutorialPlugin.Handlers
 			Timing.CallDelayed(YouTubeTutorialPlugin.Instance.Config.PlayerCacheTime, () => RemovePlayer(ev.Player));
 		}
 
-		private void RemovePlayer(Exiled.API.Features.Player player)
+		private static void RemovePlayer(Exiled.API.Features.Player player)
 		{
 			if (!Exiled.API.Features.Player.UserIdsCache.ContainsKey(player.UserId) && YouTubeTutorialPlugin.PlayerData.ContainsKey(player.UserId))
 			{
@@ -26,7 +26,7 @@ namespace YouTubeTutorialPlugin.Handlers
 			}
 		}
 
-		public void OnJoined(JoinedEventArgs ev)
+		public static void OnJoined(JoinedEventArgs ev)
 		{
 			string message =
 				YouTubeTutorialPlugin.Instance.Config.JoinedMessage.Replace("{player}", ev.Player.Nickname);
@@ -35,7 +35,7 @@ namespace YouTubeTutorialPlugin.Handlers
 			PlayerData.LoadData(ev.Player.UserId);
 		}
 
-		public void OnPlayerDied(DiedEventArgs ev)
+		public static void OnPlayerDied(DiedEventArgs ev)
 		{
 			if (ev.Killer != null)
 			{
@@ -48,7 +48,7 @@ namespace YouTubeTutorialPlugin.Handlers
 			}
 		}
 
-		public void OnInteractingDoor(InteractingDoorEventArgs ev)
+		public static void OnInteractingDoor(InteractingDoorEventArgs ev)
 		{
 			if (ev.IsAllowed == false)
 			{

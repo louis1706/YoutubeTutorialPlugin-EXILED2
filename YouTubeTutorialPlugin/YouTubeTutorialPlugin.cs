@@ -20,11 +20,11 @@ namespace YouTubeTutorialPlugin
 	    private Handlers.Server server;
 	    private Handlers.Player player;
 
-	    public static Dictionary<string, PlayerData> PlayerData = new Dictionary<string, PlayerData>();
+	    public static readonly Dictionary<string, PlayerData> PlayerData = new Dictionary<string, PlayerData>();
 
 	    private int _patchesCounter;
 
-	    public Harmony Harmony { get; private set; }
+	    private Harmony Harmony { get; set; }
 
 		public override void OnEnabled()
 		{
@@ -48,7 +48,7 @@ namespace YouTubeTutorialPlugin
 			{
 				Harmony = new Harmony($"youtube.tutorialplugin.{++_patchesCounter}");
 
-				var lastDebugStatus = Harmony.DEBUG;
+				bool lastDebugStatus = Harmony.DEBUG;
 				Harmony.DEBUG = true;
 
 				Harmony.PatchAll();
@@ -75,24 +75,24 @@ namespace YouTubeTutorialPlugin
 			server = new Handlers.Server();
 			player = new Handlers.Player();
 
-			Player.Left += player.OnLeft;
-			Player.Joined += player.OnJoined;
-			Player.InteractingDoor += player.OnInteractingDoor;
-			Player.Died += player.OnPlayerDied;
+			Player.Left += Handlers.Player.OnLeft;
+			Player.Joined += Handlers.Player.OnJoined;
+			Player.InteractingDoor += Handlers.Player.OnInteractingDoor;
+			Player.Died += Handlers.Player.OnPlayerDied;
 
-			Server.WaitingForPlayers += server.OnWaitingForPlayers;
-			Server.RoundStarted += server.OnRoundStarted;
+			Server.WaitingForPlayers += Handlers.Server.OnWaitingForPlayers;
+			Server.RoundStarted += Handlers.Server.OnRoundStarted;
 		}
 
 		private void UnregisterEvents()
 		{
-			Player.Left -= player.OnLeft;
-			Player.Joined -= player.OnJoined;
-			Player.InteractingDoor -= player.OnInteractingDoor;
-			Player.Died -= player.OnPlayerDied;
+			Player.Left -= Handlers.Player.OnLeft;
+			Player.Joined -= Handlers.Player.OnJoined;
+			Player.InteractingDoor -= Handlers.Player.OnInteractingDoor;
+			Player.Died -= Handlers.Player.OnPlayerDied;
 
-			Server.WaitingForPlayers -= server.OnWaitingForPlayers;
-			Server.RoundStarted -= server.OnRoundStarted;
+			Server.WaitingForPlayers -= Handlers.Server.OnWaitingForPlayers;
+			Server.RoundStarted -= Handlers.Server.OnRoundStarted;
 
 			server = null;
 			player = null;

@@ -31,7 +31,7 @@ namespace YouTubeTutorialPlugin.Commands.Data
 		}
 
 		public override string Command { get; } = "data";
-		public override string[] Aliases { get; } = new String[] { };
+		public override string[] Aliases { get; } = { };
 		public override string Description { get; } = "Handles commands related to player data.";
 	}
 }

@@ -32,16 +32,15 @@ namespace YouTubeTutorialPlugin.Api
 		{
 			string dataPath = Path.Combine(Path.Combine(PlayersPath, userId), "data.yml");
 
-			if (File.Exists(dataPath))
-			{
-				string data = File.ReadAllText(dataPath);
+			if (!File.Exists(dataPath)) return;
+			
+			string data = File.ReadAllText(dataPath);
 
-				IDeserializer deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
+			IDeserializer deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
 
-				var playerData = deserializer.Deserialize<PlayerData>(data);
+			var playerData = deserializer.Deserialize<PlayerData>(data);
 
-				YouTubeTutorialPlugin.PlayerData.GetOrAdd(userId, () => playerData);
-			}
+			YouTubeTutorialPlugin.PlayerData.GetOrAdd(userId, () => playerData);
 		}
 	}
 }

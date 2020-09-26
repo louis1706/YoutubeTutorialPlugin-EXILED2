@@ -3,14 +3,14 @@ using YouTubeTutorialPlugin.Api;
 
 namespace YouTubeTutorialPlugin.Handlers
 {
-	class Server
+	internal class Server
 	{
-		public void OnWaitingForPlayers()
+		public static void OnWaitingForPlayers()
 		{
 			Log.Info("Waiting for players...");
 		}
 
-		public void OnRoundStarted()
+		public static void OnRoundStarted()
 		{
 			Map.Broadcast(6, YouTubeTutorialPlugin.Instance.Config.RoundStartedMessage);
 			Log.Info(YouTubeTutorialPlugin.Instance.Config.RoundStartedMessage);
