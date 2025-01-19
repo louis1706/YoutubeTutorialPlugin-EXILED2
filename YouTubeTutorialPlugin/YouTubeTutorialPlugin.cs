@@ -29,21 +29,21 @@ namespace YouTubeTutorialPlugin
 		{
 			Instance = this;
 
-            base.OnEnabled();
-
 			RegisterEvents();
 			Patch();
-		}
 
-		public override void OnDisabled()
+            base.OnEnabled();
+        }
+
+        public override void OnDisabled()
 		{
-			base.OnDisabled();
-
 			UnregisterEvents();
 			Unpatch();
-		}
 
-		private void Patch()
+            base.OnDisabled();
+        }
+
+        private void Patch()
 		{
 			try
 			{
