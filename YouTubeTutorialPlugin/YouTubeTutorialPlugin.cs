@@ -12,8 +12,7 @@ namespace YouTubeTutorialPlugin
 {
     public class YouTubeTutorialPlugin : Plugin<Config, Translation>
     {
-		public static YouTubeTutorialPlugin Instance { get; } = new YouTubeTutorialPlugin();
-		private YouTubeTutorialPlugin() { }
+		public static YouTubeTutorialPlugin Instance { get; internal set; }
 
 		public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
@@ -28,7 +27,9 @@ namespace YouTubeTutorialPlugin
 
 		public override void OnEnabled()
 		{
-			base.OnEnabled();
+			Instance = this;
+
+            base.OnEnabled();
 
 			RegisterEvents();
 			Patch();
@@ -48,14 +49,9 @@ namespace YouTubeTutorialPlugin
 			{
 				Harmony = new Harmony($"youtube.tutorialplugin.{++_patchesCounter}");
 
-				bool lastDebugStatus = Harmony.DEBUG;
-				Harmony.DEBUG = true;
+				GlobalPatchProcessor.PatchAll(Harmony, out int failPatch);
 
-				Harmony.PatchAll();
-
-				Harmony.DEBUG = lastDebugStatus;
-
-				Log.Debug("Patches applied successfully!");
+				Log.Debug($"Patches applied successfully! Number of Failed Patch {failPatch}");
 			}
 			catch (Exception e)
 			{
