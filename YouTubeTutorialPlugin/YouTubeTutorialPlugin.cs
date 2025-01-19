@@ -61,7 +61,7 @@ namespace YouTubeTutorialPlugin
 
 		private void Unpatch()
 		{
-			Harmony.UnpatchAll();
+			Harmony.UnpatchAll(Harmony.Id);
 
 			Log.Debug("Patches have been undone!");
 		}
