@@ -10,7 +10,7 @@ using Player = Exiled.Events.Handlers.Player;
 
 namespace YouTubeTutorialPlugin
 {
-    public class YouTubeTutorialPlugin : Plugin<Config>
+    public class YouTubeTutorialPlugin : Plugin<Config, Translation>
     {
 		public static YouTubeTutorialPlugin Instance { get; } = new YouTubeTutorialPlugin();
 		private YouTubeTutorialPlugin() { }
@@ -55,7 +55,7 @@ namespace YouTubeTutorialPlugin
 
 				Harmony.DEBUG = lastDebugStatus;
 
-				Log.Debug("Patches applied successfully!", Loader.ShouldDebugBeShown);
+				Log.Debug("Patches applied successfully!");
 			}
 			catch (Exception e)
 			{
@@ -67,7 +67,7 @@ namespace YouTubeTutorialPlugin
 		{
 			Harmony.UnpatchAll();
 
-			Log.Debug("Patches have been undone!", Loader.ShouldDebugBeShown);
+			Log.Debug("Patches have been undone!");
 		}
 
 		private void RegisterEvents()
@@ -75,8 +75,8 @@ namespace YouTubeTutorialPlugin
 			server = new Handlers.Server();
 			player = new Handlers.Player();
 
-			Player.Left += Handlers.Player.OnLeft;
-			Player.Joined += Handlers.Player.OnJoined;
+			Player.Destroying += Handlers.Player.OnDestroying;
+			Player.Verified += Handlers.Player.OnVerified;
 			Player.InteractingDoor += Handlers.Player.OnInteractingDoor;
 			Player.Died += Handlers.Player.OnPlayerDied;
 
@@ -86,9 +86,9 @@ namespace YouTubeTutorialPlugin
 
 		private void UnregisterEvents()
 		{
-			Player.Left -= Handlers.Player.OnLeft;
-			Player.Joined -= Handlers.Player.OnJoined;
-			Player.InteractingDoor -= Handlers.Player.OnInteractingDoor;
+            Player.Destroying -= Handlers.Player.OnDestroying;
+            Player.Verified -= Handlers.Player.OnVerified;
+            Player.InteractingDoor -= Handlers.Player.OnInteractingDoor;
 			Player.Died -= Handlers.Player.OnPlayerDied;
 
 			Server.WaitingForPlayers -= Handlers.Server.OnWaitingForPlayers;

@@ -5,7 +5,7 @@ using RemoteAdmin;
 namespace YouTubeTutorialPlugin.Commands
 {
 	[CommandHandler(typeof(RemoteAdminCommandHandler))]
-	class HelloWorld : ICommand
+	class HelloWorld : ICommand, IUsageProvider
 	{
 		public string Command { get; } = "hello";
 
@@ -13,7 +13,9 @@ namespace YouTubeTutorialPlugin.Commands
 
 		public string Description { get; } = "A command that says hello to the world.";
 
-		public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        public string[] Usage => new[] { "Usage Provider" };
+
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
 		{
 			if (sender is PlayerCommandSender player)
 			{

@@ -1,14 +1,16 @@
 ﻿using HarmonyLib;
+using InventorySystem.Items.Radio;
+using PlayerRoles;
 
 namespace YouTubeTutorialPlugin.Patches
 {
-	[HarmonyPatch(typeof(Radio))]
-	[HarmonyPatch(nameof(Radio.UseBattery))]
+	[HarmonyPatch(typeof(RadioItem))]
+	[HarmonyPatch(nameof(RadioItem.BatteryPercent))]
 	internal static class RadioPatch
 	{
-		static bool Prefix(Radio __instance)
+		static bool Prefix(RadioItem __instance)
 		{
-			return __instance.ccm.CurClass == RoleType.ChaosInsurgency;
+			return __instance.Owner.GetRoleId().GetTeam() == Team.ChaosInsurgency;
 		}
 	}
 }

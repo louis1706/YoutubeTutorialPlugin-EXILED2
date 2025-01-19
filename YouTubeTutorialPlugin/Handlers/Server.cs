@@ -12,8 +12,8 @@ namespace YouTubeTutorialPlugin.Handlers
 
 		public static void OnRoundStarted()
 		{
-			Map.Broadcast(6, YouTubeTutorialPlugin.Instance.Config.RoundStartedMessage);
-			Log.Info(YouTubeTutorialPlugin.Instance.Config.RoundStartedMessage);
+			Map.Broadcast(6, YouTubeTutorialPlugin.Instance.Translation.RoundStartedMessage);
+			Log.Info(YouTubeTutorialPlugin.Instance.Translation.RoundStartedMessage);
 
 			foreach (Exiled.API.Features.Player player in Exiled.API.Features.Player.List)
 			{

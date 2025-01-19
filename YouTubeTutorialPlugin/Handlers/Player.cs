@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.Events.EventArgs;
+using Exiled.Events.EventArgs.Player;
 using MEC;
 using YouTubeTutorialPlugin.Api;
 
@@ -7,10 +8,10 @@ namespace YouTubeTutorialPlugin.Handlers
 {
 	internal class Player
 	{
-		public static void OnLeft(LeftEventArgs ev)
+		public static void OnDestroying(DestroyingEventArgs ev)
 		{
 			string message =
-				YouTubeTutorialPlugin.Instance.Config.LeftMessage.Replace("{player}", ev.Player.Nickname);
+				YouTubeTutorialPlugin.Instance.Translation.LeftMessage.Replace("{player}", ev.Player.Nickname);
 			Map.Broadcast(6, message);
 
 			Timing.CallDelayed(YouTubeTutorialPlugin.Instance.Config.PlayerCacheTime, () => RemovePlayer(ev.Player));
@@ -26,10 +27,10 @@ namespace YouTubeTutorialPlugin.Handlers
 			}
 		}
 
-		public static void OnJoined(JoinedEventArgs ev)
+		public static void OnVerified(VerifiedEventArgs ev)
 		{
 			string message =
-				YouTubeTutorialPlugin.Instance.Config.JoinedMessage.Replace("{player}", ev.Player.Nickname);
+				YouTubeTutorialPlugin.Instance.Translation.JoinedMessage.Replace("{player}", ev.Player.Nickname);
 			Map.Broadcast(6, message);
 
 			PlayerData.LoadData(ev.Player.UserId);
@@ -37,14 +38,14 @@ namespace YouTubeTutorialPlugin.Handlers
 
 		public static void OnPlayerDied(DiedEventArgs ev)
 		{
-			if (ev.Killer != null)
+			if (ev.Attacker != null)
 			{
-				YouTubeTutorialPlugin.PlayerData.GetOrAdd(ev.Killer.UserId, () => new PlayerData()).Kills++;
+				YouTubeTutorialPlugin.PlayerData.GetOrAdd(ev.Attacker.UserId, () => new PlayerData()).Kills++;
 			}
 
-			if (ev.Target != null)
+			if (ev.Attacker != null)
 			{
-				YouTubeTutorialPlugin.PlayerData.GetOrAdd(ev.Target.UserId, () => new PlayerData()).Deaths++;
+				YouTubeTutorialPlugin.PlayerData.GetOrAdd(ev.Attacker.UserId, () => new PlayerData()).Deaths++;
 			}
 		}
 
@@ -52,8 +53,8 @@ namespace YouTubeTutorialPlugin.Handlers
 		{
 			if (ev.IsAllowed == false)
 			{
-				ev.Player.Broadcast(3, YouTubeTutorialPlugin.Instance.Config.BoobyTrapMessage);
-				ev.Player.Kill(DamageTypes.Lure);
+				ev.Player.Broadcast(3, YouTubeTutorialPlugin.Instance.Translation.BoobyTrapMessage);
+				ev.Player.Kill("Custom Death");
 			}
 			else
 			{
